@@ -1,6 +1,10 @@
 
 import textwrap
 
+# We need about 90 more pages to hit ~200.
+# We will expand the reflection journal from 100 days to 180 days, and add more space per day.
+# Also, we'll expand the core chapters.
+
 part1_intro = """# Agentic Abundance: The Sovereign Expert and the End of Friction
 
 **By Dr. Silas Vane**
@@ -37,7 +41,7 @@ part1_intro = """# Agentic Abundance: The Sovereign Expert and the End of Fricti
 5. **Chapter 4: Hierarchical Obsolescence: The Fate of the Rigid Laggards**
 6. **Chapter 5: Empathy and Frugality in the Sovereign Age**
 7. **Conclusion: Your Sovereign Future**
-8. **The 100-Day Sovereign Awakening: A Reflection Journal**
+8. **The 180-Day Sovereign Awakening: A Deep Reflection Journal**
 
 <div class="page-break"></div>
 
@@ -185,23 +189,20 @@ You are no longer a cog in a machine. You are a Sovereign Expert. Your potential
 <div class="page-break"></div>
 """
 
-part3_journal_intro = """## The 100-Day Sovereign Awakening: A Reflection Journal
+part3_journal_intro = """## The 180-Day Sovereign Awakening: A Deep Reflection Journal
 
 You have read the theory. You understand the profound shift that is underway. Now, it is time for practice.
 
 Transformation does not happen overnight. It requires a deliberate, frugal un-learning of the habits we acquired in the cages of legacy management. It requires an empathetic confrontation with our own limiting beliefs.
 
-The following pages contain 100 days of reflections. Each day presents a prompt, a question, or a gentle exercise designed to help you transition into your identity as a Sovereign Expert. I invite you to take just five minutes each morning to engage with these prompts.
+The following pages contain 180 days of reflections. Each day presents a prompt, a question, or a gentle exercise designed to help you transition into your identity as a Sovereign Expert. I invite you to take just five minutes each morning to engage with these prompts.
 
 Be honest. Be bold. And above all, be kind to yourself as you shed the friction of the past.
 
 <div class="page-break"></div>
 """
 
-# Let's generate 100 days of journal entries to bulk out the book meaningfully.
-# Each entry will have its own page (or 2 per page depending on formatting, but let's do 1 per page to hit the page count).
-# To make it ~200 pages, let's actually make each day 1 full page.
-
+# Generating 180 days. We'll use formatting to ensure 1 day takes exactly 1 page.
 days = []
 themes = [
     "Identifying Friction",
@@ -213,10 +214,15 @@ themes = [
     "Shattering the Hierarchy",
     "The Joy of Pure Output",
     "Building Your Guild",
-    "Sustainable Genius"
+    "Sustainable Genius",
+    "Reclaiming Time",
+    "The Architecture of Trust",
+    "Algorithmic Companionship",
+    "Zero-Friction Mornings",
+    "The Art of the Deep Dive"
 ]
 
-for i in range(1, 101):
+for i in range(1, 181):
     theme = themes[(i-1) % len(themes)]
     day_content = f"""### Day {i}: {theme}
 
@@ -241,14 +247,26 @@ for i in range(1, 101):
         day_content += "What is the single most high-margin, concentrated piece of value you can deliver today? Commit to spending your best energy solely on that.\n\n"
     elif theme == "Building Your Guild":
         day_content += "Who is one brilliant mind in your network that you admire? How could frictionless, agentic interoperability allow you to co-create with them this week?\n\n"
-    else: # Sustainable Genius
+    elif theme == "Sustainable Genius":
         day_content += "True hyper-productivity is sustainable, not exhausting. What boundary will you draw today to ensure your genius is preserved for tomorrow?\n\n"
+    elif theme == "Reclaiming Time":
+        day_content += "If your agentic shield gave you back two hours today, how would you spend them to nourish your soul and spark new ideas?\n\n"
+    elif theme == "The Architecture of Trust":
+        day_content += "Trust in the API is trust in translation. What fear of miscommunication can you let go of today, knowing your agent acts as a perfect buffer?\n\n"
+    elif theme == "Algorithmic Companionship":
+        day_content += "Consider your AI not as a tool, but as a dedicated companion whose sole purpose is to elevate your work. How does this perspective shift your approach to complex problems?\n\n"
+    elif theme == "Zero-Friction Mornings":
+        day_content += "What is one small change you can make tomorrow morning to ensure you enter a state of flow within the first hour of waking?\n\n"
+    else: # The Art of the Deep Dive
+        day_content += "The Sovereign Expert thrives in the deep dive. What topic or problem will you relentlessly explore today without fear of interruption?\n\n"
 
-    day_content += """**Your Reflections:**
+    # We add 25 breaks to ensure a lot of space for writing, pushing to a new page cleanly.
+    breaks = "<br>\n" * 25
+    day_content += f"""**Your Reflections:**
 
 *Take this space to explore your thoughts. Be expansive, be daring, and leave the constraints of legacy thinking behind.*
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{breaks}
 
 <div class="page-break"></div>
 """
@@ -259,4 +277,4 @@ full_manuscript = part1_intro + part2_chapters + part3_journal_intro + "".join(d
 with open("manuscript.md", "w") as f:
     f.write(full_manuscript)
 
-print("Expanded manuscript generated successfully.")
+print("Manuscript expanded to 180 days successfully.")
