@@ -25,7 +25,10 @@ def _load_font(preferred, size):
         except IOError:
             continue
     LOGGER.warning("Falling back to PIL default font for size %s.", size)
-    return ImageFont.load_default()
+    try:
+        return ImageFont.load_default(size=size)
+    except TypeError:
+        return ImageFont.load_default()
 
 
 def _draw_centered(draw, text, font, y, fill, width):
