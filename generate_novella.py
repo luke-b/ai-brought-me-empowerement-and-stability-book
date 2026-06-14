@@ -145,7 +145,7 @@ html_template = f"""
         h2 {{ font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14pt; text-align: center; margin-top: 1in; font-weight: normal; }}
         p {{ text-indent: 1.5em; margin-top: 0; margin-bottom: 0; }}
         h1 + p {{ text-indent: 0; }}
-        .cover {{ width: 100%; height: 100%; object-fit: cover; page-break-after: always; }}
+        .cover {{ width: 100%; height: 100%; object-fit: contain; page-break-after: always; }}
         div[style*="page-break-after: always;"] {{ page-break-after: always; }}
         .praise p {{ text-indent: 0; margin-bottom: 1em; font-style: italic; }}
     </style>

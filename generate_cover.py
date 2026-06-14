@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw, ImageFont
 import os
 
 def create_cover():
-    width = 1600
+    width = 1500
     height = 2400
 
     # Create background
