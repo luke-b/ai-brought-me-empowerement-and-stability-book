@@ -30,12 +30,16 @@ def create_cover():
         author_font = ImageFont.load_default()
 
     # Title
-    title = "AGENTIC ABUNDANCE"
-    # To center text, we can use textbbox
-    bbox = draw.textbbox((0, 0), title, font=title_font)
-    text_w = bbox[2] - bbox[0]
-    text_h = bbox[3] - bbox[1]
-    draw.text(((width - text_w) / 2, 300), title, font=title_font, fill='#E0E1DD')
+    title1 = "AGENTIC"
+    title2 = "ABUNDANCE"
+
+    bbox1 = draw.textbbox((0, 0), title1, font=title_font)
+    text_w1 = bbox1[2] - bbox1[0]
+    draw.text(((width - text_w1) / 2, 250), title1, font=title_font, fill='#E0E1DD')
+
+    bbox2 = draw.textbbox((0, 0), title2, font=title_font)
+    text_w2 = bbox2[2] - bbox2[0]
+    draw.text(((width - text_w2) / 2, 420), title2, font=title_font, fill='#E0E1DD')
 
     # Subtitle
     subtitle1 = "The Sovereign Expert"
@@ -43,11 +47,11 @@ def create_cover():
 
     bbox = draw.textbbox((0, 0), subtitle1, font=subtitle_font)
     text_w = bbox[2] - bbox[0]
-    draw.text(((width - text_w) / 2, 500), subtitle1, font=subtitle_font, fill='#778DA9')
+    draw.text(((width - text_w) / 2, 650), subtitle1, font=subtitle_font, fill='#778DA9')
 
     bbox = draw.textbbox((0, 0), subtitle2, font=subtitle_font)
     text_w = bbox[2] - bbox[0]
-    draw.text(((width - text_w) / 2, 600), subtitle2, font=subtitle_font, fill='#778DA9')
+    draw.text(((width - text_w) / 2, 750), subtitle2, font=subtitle_font, fill='#778DA9')
 
     # Author
     author = "Dr. Silas Vane"
