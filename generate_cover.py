@@ -1,4 +1,21 @@
+import logging
+
 from PIL import Image, ImageDraw, ImageFont
+
+
+logging.basicConfig(level=logging.INFO)
+LOGGER = logging.getLogger(__name__)
+
+CANVAS_WIDTH = 1800
+CANVAS_HEIGHT = 2700
+MARGIN = 140
+
+GRADIENT_TOP_RGB = (10, 18, 34)
+GRADIENT_BOTTOM_RGB = (36, 42, 58)
+
+TITLE_BLOCK_TOP = 300
+IMPRINT_LINE_Y = 2125
+AUTHOR_LINE_Y = 2268
 
 
 def _load_font(preferred, size):
@@ -7,6 +24,7 @@ def _load_font(preferred, size):
             return ImageFont.truetype(font_name, size)
         except IOError:
             continue
+    LOGGER.warning("Falling back to PIL default font for size %s.", size)
     return ImageFont.load_default()
 
 
@@ -17,20 +35,23 @@ def _draw_centered(draw, text, font, y, fill, width):
     return bottom - top
 
 
+def _create_vertical_gradient(width, height, top_rgb, bottom_rgb):
+    mask = Image.linear_gradient("L").resize((width, height))
+    top_layer = Image.new("RGB", (width, height), top_rgb)
+    bottom_layer = Image.new("RGB", (width, height), bottom_rgb)
+    return Image.composite(bottom_layer, top_layer, mask)
+
+
 def create_cover():
-    width, height = 1800, 2700
-    margin = 140
+    width, height = CANVAS_WIDTH, CANVAS_HEIGHT
+    margin = MARGIN
 
-    img = Image.new("RGB", (width, height), color="#0B1320")
-    pixels = img.load()
-
-    for y in range(height):
-        t = y / (height - 1)
-        r = int(10 + (36 - 10) * t)
-        g = int(18 + (42 - 18) * t)
-        b = int(34 + (58 - 34) * t)
-        for x in range(width):
-            pixels[x, y] = (r, g, b)
+    img = _create_vertical_gradient(
+        width,
+        height,
+        GRADIENT_TOP_RGB,
+        GRADIENT_BOTTOM_RGB,
+    )
 
     draw = ImageDraw.Draw(img, "RGBA")
 
@@ -83,7 +104,7 @@ def create_cover():
     author_font = _load_font(["DejaVuSans-Bold.ttf", "DejaVuSerif-Bold.ttf"], 78)
     imprint_font = _load_font(["DejaVuSans.ttf", "DejaVuSerif.ttf"], 36)
 
-    y = 300
+    y = TITLE_BLOCK_TOP
     y += _draw_centered(
         draw,
         "AGENTIC",
@@ -123,7 +144,7 @@ def create_cover():
         draw,
         "A NOVELLA OF HUMAN-AI SYMBIOSIS",
         imprint_font,
-        2125,
+        IMPRINT_LINE_Y,
         fill=(215, 198, 158, 255),
         width=width,
     )
@@ -131,7 +152,7 @@ def create_cover():
         draw,
         "DR. SILAS VANE",
         author_font,
-        2268,
+        AUTHOR_LINE_Y,
         fill=(239, 236, 226, 255),
         width=width,
     )
